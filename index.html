@@ -48,8 +48,8 @@
 
     async function loadData() {
       const [resCorrect, resWrong] = await Promise.all([
-        fetch('data_correct.json'),
-        fetch('data_wrong.json')
+        fetch('original_correct.json'),
+        fetch('original_random.json')
       ]);
       const dataCorrect = await resCorrect.json();
       const dataWrong = await resWrong.json();
