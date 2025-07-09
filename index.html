@@ -143,27 +143,85 @@ ${item.artist} | ${item.genre} | ${item.style} | (${item.result})`;
       renderPagination(totalPages);
     }
 
-    function renderPagination(totalPages) {
-      const container = document.getElementById('paginationContainer');
-      container.innerHTML = '';
+     function renderPagination(totalPages) {
+    const container = document.getElementById('paginationContainer');
+    container.innerHTML = '';
 
-      for (let i = 1; i <= totalPages && i <= 10; i++) {
-        const btn = document.createElement('button');
-        btn.textContent = i;
-        btn.disabled = i === currentPage;
-        btn.addEventListener('click', () => {
-          currentPage = i;
-          applyFilters();
-        });
-        container.appendChild(btn);
+    // Create "Previous" button
+    const prevBtn = document.createElement('button');
+    prevBtn.textContent = 'Previous';
+    prevBtn.disabled = currentPage === 1;
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        applyFilters();
       }
+    });
+    container.appendChild(prevBtn);
 
-      if (totalPages > 10) {
-        const span = document.createElement('span');
-        span.textContent = ` ... (Total ${totalPages} pages)`;
-        container.appendChild(span);
-      }
+    // Page buttons area, show buttons near current page (e.g., 4 before and after)
+    const pageButtonsToShow = 9; // Total of 9 page buttons displayed
+    let startPage = Math.max(1, currentPage - Math.floor(pageButtonsToShow / 2));
+    let endPage = startPage + pageButtonsToShow - 1;
+    if (endPage > totalPages) {
+      endPage = totalPages;
+      startPage = Math.max(1, endPage - pageButtonsToShow + 1);
     }
+
+    for (let i = startPage; i <= endPage; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      btn.disabled = i === currentPage;
+      btn.addEventListener('click', () => {
+        currentPage = i;
+        applyFilters();
+      });
+      container.appendChild(btn);
+    }
+
+    // Create "Next" button
+    const nextBtn = document.createElement('button');
+    nextBtn.textContent = 'Next';
+    nextBtn.disabled = currentPage === totalPages;
+    nextBtn.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        applyFilters();
+      }
+    });
+    container.appendChild(nextBtn);
+
+    // Show total pages info
+    const infoSpan = document.createElement('span');
+    infoSpan.style.marginLeft = '10px';
+    infoSpan.textContent = `Total ${totalPages} pages, current page ${currentPage}`;
+    container.appendChild(infoSpan);
+
+    // Add jump-to-page input box
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.min = 1;
+    input.max = totalPages;
+    input.placeholder = 'Go to page';
+    input.style.width = '80px';
+    input.style.marginLeft = '10px';
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        let val = Number(input.value);
+        if (val >= 1 && val <= totalPages) {
+          currentPage = val;
+          applyFilters();
+          input.value = '';
+        } else {
+          alert(`Please enter a page number between 1 and ${totalPages}`);
+        }
+      }
+    });
+
+    container.appendChild(input);
+  }
+
 
     loadData();
   </script>
