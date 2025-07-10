@@ -58,13 +58,18 @@
       text-align: center;
     }
 
-    #paginationContainer {
-      flex: 0 0 auto;
-      text-align: center;
-      padding: 8px 10px;
-      background-color: #f0f0f0;
-      box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
-    }
+#paginationContainer {
+  flex: 0 0 auto;
+  display: flex;                  /* 使用 flex 布局 */
+  justify-content: center;        /* 水平居中子元素 */
+  align-items: center;            /* 垂直居中子元素 */
+  flex-wrap: nowrap;              /* 不换行，保持一行 */
+  gap: 6px;                      /* 子元素间距 */
+  padding: 8px 10px;
+  background-color: #f0f0f0;
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+  text-align: unset;              /* 去掉 text-align:center，避免冲突 */
+}
 
     select, label {
       margin: 0 5px;
@@ -214,7 +219,7 @@ function getColorSquare(result) {
         const pGenerator = document.createElement('p');
         pGenerator.innerText = `Generator: ${item.generator}
 Prompt: ${promptText}`;
-
+        pGenerator.style.textAlign = 'center';
         const img = document.createElement('img');
         img.src = item.image;
         const p = document.createElement('div');
@@ -288,7 +293,7 @@ group1.style.flex = '6 1 0';
 
 img.style.width = '100%';
 img.style.height = 'auto';
-img.style.maxHeight = '60vh';
+img.style.maxHeight = '75vh';
 img.style.objectFit = 'contain';
 
 
