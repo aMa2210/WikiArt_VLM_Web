@@ -173,7 +173,23 @@
 
       displayImages(filtered);
     }
-
+function getColorSquare(result) {
+  let color;
+  if (result === 'correct') {
+    color = 'green';
+  } else if (result === 'wrong') {
+    color = 'red';
+  } 
+  return `<span style="
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-color: ${color};
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 6px;
+  "></span>`;
+}
     function displayImages(data) {
       const container = document.getElementById('imageContainer');
       container.innerHTML = '';
@@ -210,17 +226,6 @@ Prompt: ${promptText}`;
         img.src = item.image;
         const p = document.createElement('div');
 
-const color = item.result === 'correct' ? 'green' : 'red';
-const square = `<span style="
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  background-color: ${color};
-  border-radius: 2px;
-  vertical-align: middle;
-  margin-left: 6px;
-"></span>`;
-
 const table1 = `
   <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 14px; width: 100%;">
     <thead>
@@ -242,15 +247,25 @@ const table1 = `
   </table>
 `;
 
+const analysers = [item.analyser1, item.analyser2, item.analyser3, item.analyser4, item.analyser5, item.analyser6];
+const results = [item.result1, item.result2, item.result3, item.result4, item.result5, item.result6];
+
+let rowsHtml = '';
+for (let i = 0; i < analysers.length; i++) {
+  rowsHtml += `
+    <tr>
+      <td style="padding: 4px; font-weight: bold; text-align: center;">${analysers[i]}</td>
+      <td style="padding: 4px;"></td>
+      <td style="padding: 4px; font-weight: bold; text-align: center;">${getColorSquare(results[i])}</td>
+      <td style="padding: 4px;"></td>
+    </tr>
+  `;
+}
+
 const table2 = `
   <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 14px; width: 100%;">
     <tbody>
-      <tr>
-        <td style="padding: 4px; font-weight: bold; text-align: center;">${item.analyser}</td>
-        <td style="padding: 4px; font-weight: bold; text-align: center;"></td>
-        <td style="padding: 4px; font-weight: bold; text-align: center;">${square}</td>
-        <td style="padding: 4px; font-weight: bold; text-align: center;"></td>
-      </tr>
+      ${rowsHtml}
     </tbody>
   </table>
 `;
