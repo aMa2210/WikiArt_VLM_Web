@@ -226,11 +226,11 @@ const square = `<span style="
   margin-left: 6px;
 "></span>`;
 
-// 表格1：Painter, Genre, Style
 const table1 = `
   <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 14px; width: 100%;">
     <thead>
       <tr>
+        <th style="padding: 4px; text-align: center;"></th>
         <th style="padding: 4px; text-align: center;">Painter</th>
         <th style="padding: 4px; text-align: center;">Genre</th>
         <th style="padding: 4px; text-align: center;">Style</th>
@@ -238,21 +238,19 @@ const table1 = `
     </thead>
     <tbody>
       <tr>
+        <td style="padding: 4px; font-weight: bold; text-align: center;"></td>
         <td style="padding: 4px; font-weight: bold; text-align: center;">${item.artist}</td>
         <td style="padding: 4px; font-weight: bold; text-align: center;">${item.genre}</td>
         <td style="padding: 4px; font-weight: bold; text-align: center;">${item.style}</td>
       </tr>
-    </tbody>
-  </table>
-`;
-
-// 表格2：Analyser + 方块
-const table2 = `
-  <table style="border-collapse: collapse; font-size: 14px; width: 300px; border: 1px solid #ccc;">
-    <tbody>
       <tr>
-        <td style="padding: 4px; font-weight: bold; text-align: left; border: 1px solid #ccc;">${item.analyser}</td>
-        <td style="padding: 4px; font-weight: bold; text-align: center; border: 1px solid #ccc;">${square}</td>
+        <td colspan="4" style="padding: 8px;"></td>
+      </tr>
+      <tr>
+        <td style="padding: 4px; font-weight: bold; text-align: center;">${item.analyser}</td>
+        <td style="padding: 4px; font-weight: bold; text-align: center;"></td>
+        <td style="padding: 4px; font-weight: bold; text-align: center;">${square}</td>
+        <td style="padding: 4px; font-weight: bold; text-align: center;"></td>
       </tr>
     </tbody>
   </table>
@@ -260,7 +258,7 @@ const table2 = `
 
 
 
-p.innerHTML = table1 + table2;
+p.innerHTML = table1;
 
         div.appendChild(pGenerator);        
         div.appendChild(img);
