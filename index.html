@@ -205,7 +205,7 @@
         } else if (item.prompt === 'Incorrect Painter') {
           promptText = 'Prompt: Is this a real painting from {Random Artist} Please answer only yes or no.';
         } else {
-          promptText = `Prompt: ${item.prompt}`;
+          promptText = `${item.prompt}`;
         }
         const pGenerator = document.createElement('p');
         pGenerator.innerText = `Generator: ${item.generator}
@@ -251,11 +251,12 @@ const table2 = `
   <table style="border-collapse: collapse; font-size: 14px; width: 200px;">
     <tbody>
       <tr>
-        <td style="padding: 4px;">${item.analyser} ${square}</td>
+        <td style="padding: 4px 4px 4px 0px;">${item.analyser} ${square}</td>
       </tr>
     </tbody>
   </table>
 `;
+
 
 p.innerHTML = table1 + table2;
 
