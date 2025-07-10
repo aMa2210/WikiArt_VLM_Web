@@ -126,7 +126,7 @@
 
       allData = [...dataCorrect, ...dataWrong];
 
-      ['generator', 'analyser', 'prompt', 'result', 'artist', 'genre', 'style'].forEach(field => {
+      ['generator', 'prompt', 'result', 'artist', 'genre', 'style'].forEach(field => {
         populateSelect(field);
         document.getElementById(field + 'Select').addEventListener('change', () => {
           currentPage = 1;
