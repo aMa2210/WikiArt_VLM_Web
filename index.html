@@ -94,9 +94,6 @@
       <label for="promptSelect">Prompt:</label>
       <select id="promptSelect"><option value="all">All</option></select>
 
-      <label for="resultSelect">Result:</label>
-      <select id="resultSelect"><option value="all">All</option></select>
-
       <label for="artistSelect">Artist:</label>
       <select id="artistSelect"><option value="all">All</option></select>
 
@@ -126,7 +123,7 @@
 
       allData = [...dataCorrect, ...dataWrong];
 
-      ['generator', 'prompt', 'result', 'artist', 'genre', 'style'].forEach(field => {
+      ['generator', 'prompt', 'artist', 'genre', 'style'].forEach(field => {
         populateSelect(field);
         document.getElementById(field + 'Select').addEventListener('change', () => {
           currentPage = 1;
@@ -157,7 +154,6 @@
     function applyFilters() {
       const generator = document.getElementById('generatorSelect').value;
       const prompt = document.getElementById('promptSelect').value;
-      const result = document.getElementById('resultSelect').value;
       const artist = document.getElementById('artistSelect').value;
       const genre = document.getElementById('genreSelect').value;
       const style = document.getElementById('styleSelect').value;
@@ -165,7 +161,6 @@
       const filtered = allData.filter(d =>
         (generator === 'all' || d.generator === generator) &&
         (prompt === 'all' || d.prompt === prompt) &&
-        (result === 'all' || d.result === result) &&
         (artist === 'all' || d.artist === artist) &&
         (genre === 'all' || d.genre === genre) &&
         (style === 'all' || d.style === style)
@@ -209,7 +204,7 @@ function getColorSquare(result) {
      
       pageData.forEach(item => {
         const div = document.createElement('div');
-        div.className = `image-box ${item.result}`;
+        div.className = `image-box`;
         let promptText = '';
         if (item.prompt === 'Correct Painter') {
           promptText = `Is this a real painting from ${item.artist}? Please answer only yes or no.`;
