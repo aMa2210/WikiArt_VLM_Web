@@ -271,11 +271,28 @@ pTable1.innerHTML = table1;
 
     p.innerHTML = table2;
 
-        div.appendChild(pGenerator);    
-        div.appendChild(pTable1);     
-        div.appendChild(img);
-        div.appendChild(p);
-        container.appendChild(div);
+        const parentDiv = document.createElement('div');
+parentDiv.style.display = 'flex';
+parentDiv.className = 'image-box';  // 保留原本样式
+
+// 创建第一组，纵向排列（默认即可）
+const group1 = document.createElement('div');
+group1.style.display = 'flex';
+group1.style.flexDirection = 'column';
+group1.appendChild(pGenerator);
+group1.appendChild(pTable1);
+group1.appendChild(img);
+
+// 创建第二组，包含一个 div（table2）
+const group2 = document.createElement('div');
+group2.appendChild(p);
+
+// 把两组加到父容器中
+parentDiv.appendChild(group1);
+parentDiv.appendChild(group2);
+
+// 把父容器加到页面上
+container.appendChild(parentDiv);
       });
 
       renderPagination(totalPages);
