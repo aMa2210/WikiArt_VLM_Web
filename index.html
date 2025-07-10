@@ -41,7 +41,7 @@
       max-width: 100%;
       max-height: 100%;
       display: flex;
-      flex-direction: column;
+      /* flex-direction: column;
       align-items: center;
       justify-content: center;
     }
@@ -203,8 +203,6 @@ function getColorSquare(result) {
       const pageData = data.slice(start, end);
      
       pageData.forEach(item => {
-        const div = document.createElement('div');
-        div.className = `image-box`;
         let promptText = '';
         if (item.prompt === 'Correct Painter') {
           promptText = `Is this a real painting from ${item.artist}? Please answer only yes or no.`;
