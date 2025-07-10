@@ -248,15 +248,16 @@ const table1 = `
 
 // 表格2：Analyser + 方块
 const table2 = `
-  <table style="border-collapse: collapse; font-size: 14px; width: 300px;">
+  <table style="border-collapse: collapse; font-size: 14px; width: 300px; border: 1px solid #ccc;">
     <tbody>
       <tr>
-        <td style="padding: 4px; font-weight: bold; text-align: left;">${item.analyser}</td>
-        <td style="padding: 4px; font-weight: bold; text-align: right;"> ${square}</td>
+        <td style="padding: 4px; font-weight: bold; text-align: left; border: 1px solid #ccc;">${item.analyser}</td>
+        <td style="padding: 4px; font-weight: bold; text-align: center; border: 1px solid #ccc;">${square}</td>
       </tr>
     </tbody>
   </table>
 `;
+
 
 
 p.innerHTML = table1 + table2;
