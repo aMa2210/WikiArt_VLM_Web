@@ -195,15 +195,71 @@
       const start = (currentPage - 1) * pageSize;
       const end = start + pageSize;
       const pageData = data.slice(start, end);
-
+     
       pageData.forEach(item => {
         const div = document.createElement('div');
         div.className = `image-box ${item.result}`;
+        let promptText = '';
+        if (item.prompt === 'Correct Painter') {
+          promptText = `Prompt: Is this a real painting from ${item.artist}? Please answer only yes or no.`;
+        } else if (item.prompt === 'Incorrect Painter') {
+          promptText = 'Prompt: Is this a real painting from {Random Artist} Please answer only yes or no.';
+        } else {
+          promptText = `Prompt: ${item.prompt}`;
+        }
+        const pGenerator = document.createElement('p');
+        pGenerator.innerText = `Generator: ${item.generator}
+Prompt: ${promptText}`;
+
         const img = document.createElement('img');
         img.src = item.image;
-        const p = document.createElement('p');
-        p.innerText = `${item.generator} | ${item.analyser} | ${item.prompt}
-${item.artist} | ${item.genre} | ${item.style} | (${item.result})`;
+        const p = document.createElement('div');
+
+const color = item.result === 'correct' ? 'green' : 'red';
+const square = `<span style="
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-color: ${color};
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-left: 6px;
+"></span>`;
+
+// 表格1：Painter, Genre, Style
+const table1 = `
+  <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 14px; width: 100%;">
+    <thead>
+      <tr>
+        <th style="padding: 4px; text-align: left;">Painter</th>
+        <th style="padding: 4px; text-align: left;">Genre</th>
+        <th style="padding: 4px; text-align: left;">Style</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 4px;">${item.artist}</td>
+        <td style="padding: 4px;">${item.genre}</td>
+        <td style="padding: 4px;">${item.style}</td>
+      </tr>
+    </tbody>
+  </table>
+`;
+
+// 表格2：Analyser + 方块
+const table2 = `
+  <table style="border-collapse: collapse; font-size: 14px; width: 200px;">
+    <tbody>
+      <tr>
+        <td style="padding: 4px;">${item.analyser} ${square}</td>
+      </tr>
+    </tbody>
+  </table>
+`;
+
+p.innerHTML = table1 + table2;
+
+        div.appendChild(pGenerator);        
         div.appendChild(img);
         div.appendChild(p);
         container.appendChild(div);
