@@ -47,8 +47,8 @@
     }
 
     .image-box img {
-      max-width: 100%;
-      max-height: 80vh;
+      max-width: 60%;
+      max-height: 60vh;
       object-fit: contain;
     }
 
@@ -272,6 +272,7 @@ pTable1.innerHTML = table1;
         const parentDiv = document.createElement('div');
 parentDiv.style.display = 'flex';
 parentDiv.className = 'image-box';  // 保留原本样式
+parentDiv.style.alignItems = 'center';
 
 // 创建第一组，纵向排列（默认即可）
 const group1 = document.createElement('div');
