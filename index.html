@@ -231,16 +231,16 @@ const table1 = `
   <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 14px; width: 100%;">
     <thead>
       <tr>
-        <th style="padding: 4px; text-align: left;">Painter</th>
-        <th style="padding: 4px; text-align: left;">Genre</th>
-        <th style="padding: 4px; text-align: left;">Style</th>
+        <th style="padding: 4px; text-align: center;">Painter</th>
+        <th style="padding: 4px; text-align: center;">Genre</th>
+        <th style="padding: 4px; text-align: center;">Style</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td style="padding: 4px; font-weight: bold;">${item.artist}</td>
-        <td style="padding: 4px; font-weight: bold;">${item.genre}</td>
-        <td style="padding: 4px; font-weight: bold;">${item.style}</td>
+        <td style="padding: 4px; font-weight: bold; text-align: center;">${item.artist}</td>
+        <td style="padding: 4px; font-weight: bold; text-align: center;">${item.genre}</td>
+        <td style="padding: 4px; font-weight: bold; text-align: center;">${item.style}</td>
       </tr>
     </tbody>
   </table>
@@ -251,7 +251,8 @@ const table2 = `
   <table style="border-collapse: collapse; font-size: 14px; width: 300px;">
     <tbody>
       <tr>
-        <td style="padding: 4px 4px 4px 0px; font-weight: bold;">${item.analyser} ${square}</td>
+        <td style="padding: 4px; font-weight: bold; text-align: left;">${item.analyser</td>
+        <td style="padding: 4px; font-weight: bold; text-align: right;"> ${square}</td>
       </tr>
     </tbody>
   </table>
