@@ -90,8 +90,6 @@
       <label for="generatorSelect">Generator:</label>
       <select id="generatorSelect"><option value="all">All</option></select>
 
-      <label for="analyserSelect">Analyser:</label>
-      <select id="analyserSelect"><option value="all">All</option></select>
 
       <label for="promptSelect">Prompt:</label>
       <select id="promptSelect"><option value="all">All</option></select>
@@ -148,7 +146,6 @@
         option.textContent = v;
         if (
           (field === 'generator' && v === 'Original') ||
-          (field === 'analyser' && v === 'GPT4.1-mini') ||
           (field === 'prompt' && v === 'Correct Painter')
         ) {
           option.selected = true;
@@ -159,7 +156,6 @@
 
     function applyFilters() {
       const generator = document.getElementById('generatorSelect').value;
-      const analyser = document.getElementById('analyserSelect').value;
       const prompt = document.getElementById('promptSelect').value;
       const result = document.getElementById('resultSelect').value;
       const artist = document.getElementById('artistSelect').value;
@@ -168,7 +164,6 @@
 
       const filtered = allData.filter(d =>
         (generator === 'all' || d.generator === generator) &&
-        (analyser === 'all' || d.analyser === analyser) &&
         (prompt === 'all' || d.prompt === prompt) &&
         (result === 'all' || d.result === result) &&
         (artist === 'all' || d.artist === artist) &&
@@ -243,9 +238,13 @@ const table1 = `
         <td style="padding: 4px; font-weight: bold; text-align: center;">${item.genre}</td>
         <td style="padding: 4px; font-weight: bold; text-align: center;">${item.style}</td>
       </tr>
-      <tr>
-        <td colspan="4" style="padding: 8px;"></td>
-      </tr>
+    </tbody>
+  </table>
+`;
+
+const table2 = `
+  <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 14px; width: 100%;">
+    <tbody>
       <tr>
         <td style="padding: 4px; font-weight: bold; text-align: center;">${item.analyser}</td>
         <td style="padding: 4px; font-weight: bold; text-align: center;"></td>
@@ -256,11 +255,14 @@ const table1 = `
   </table>
 `;
 
+const pTable1 = document.createElement('div');
+pTable1.innerHTML = table1;
 
 
-p.innerHTML = table1;
+    p.innerHTML = table2;
 
-        div.appendChild(pGenerator);        
+        div.appendChild(pGenerator);    
+        div.appendChild(pTable1);     
         div.appendChild(img);
         div.appendChild(p);
         container.appendChild(div);
