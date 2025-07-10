@@ -2,49 +2,121 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Image Viewer by Multiple Labels</title>
+  <title>WikiArt Image Viewer</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    .image-box { display: inline-block; margin: 10px; border: 3px solid #ccc; padding: 5px; }
-    .correct { border-color: green; }
-    .wrong { border-color: red; }
-    img { max-width: 150px; max-height: 150px; }
-    label, select { margin-right: 10px; }
-    #paginationContainer { margin-top: 20px; }
-    button { padding: 5px 10px; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      overflow: hidden; /* prevent scroll */
+    }
+
+    #pageContainer {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    #controlsContainer {
+      flex: 0 0 10%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      box-sizing: border-box;
+      background-color: #f0f0f0;
+    }
+
+    #imageContainer {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffffff;
+    }
+
+    .image-box {
+      max-width: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .image-box p {
+      margin-top: 8px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    #paginationContainer {
+      flex: 0 0 auto;
+      text-align: center;
+      padding: 8px 10px;
+      background-color: #f0f0f0;
+      box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    select, label {
+      margin: 0 5px;
+      font-size: 14px;
+    }
+
+    button {
+      margin: 0 3px;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    input[type="number"] {
+      width: 60px;
+      margin-left: 10px;
+      padding: 4px;
+    }
   </style>
 </head>
 <body>
-  <h1>WikiArt Image Viewer</h1>
+  <div id="pageContainer">
+    <div id="controlsContainer">
+      <label for="generatorSelect">Generator:</label>
+      <select id="generatorSelect"><option value="all">All</option></select>
 
-  <label for="generatorSelect">Generator:</label>
-  <select id="generatorSelect"><option value="all">All</option></select>
+      <label for="analyserSelect">Analyser:</label>
+      <select id="analyserSelect"><option value="all">All</option></select>
 
-  <label for="analyserSelect">Analyser:</label>
-  <select id="analyserSelect"><option value="all">All</option></select>
+      <label for="promptSelect">Prompt:</label>
+      <select id="promptSelect"><option value="all">All</option></select>
 
-  <label for="promptSelect">Prompt:</label>
-  <select id="promptSelect"><option value="all">All</option></select>
+      <label for="resultSelect">Result:</label>
+      <select id="resultSelect"><option value="all">All</option></select>
 
-  <label for="resultSelect">Result:</label>
-  <select id="resultSelect"><option value="all">All</option></select>
+      <label for="artistSelect">Artist:</label>
+      <select id="artistSelect"><option value="all">All</option></select>
 
-  <label for="artistSelect">Artist:</label>
-  <select id="artistSelect"><option value="all">All</option></select>
+      <label for="genreSelect">Genre:</label>
+      <select id="genreSelect"><option value="all">All</option></select>
 
-  <label for="genreSelect">Genre:</label>
-  <select id="genreSelect"><option value="all">All</option></select>
+      <label for="styleSelect">Style:</label>
+      <select id="styleSelect"><option value="all">All</option></select>
+    </div>
 
-  <label for="styleSelect">Style:</label>
-  <select id="styleSelect"><option value="all">All</option></select>
-
-  <div id="imageContainer"></div>
-  <div id="paginationContainer"></div>
+    <div id="imageContainer"></div>
+    <div id="paginationContainer"></div>
+  </div>
 
   <script>
     let allData = [];
     let currentPage = 1;
-    const pageSize = 100;
+    const pageSize = 1;
 
     async function loadData() {
       const [resCorrect, resWrong] = await Promise.all([
@@ -53,16 +125,13 @@
       ]);
       const dataCorrect = await resCorrect.json();
       const dataWrong = await resWrong.json();
-       
+
       allData = [...dataCorrect, ...dataWrong];
 
       ['generator', 'analyser', 'prompt', 'result', 'artist', 'genre', 'style'].forEach(field => {
         populateSelect(field);
-      });
-
-      ['generator', 'analyser', 'prompt', 'result', 'artist', 'genre', 'style'].forEach(field => {
         document.getElementById(field + 'Select').addEventListener('change', () => {
-          currentPage = 1; // 每次更改筛选都回到第一页
+          currentPage = 1;
           applyFilters();
         });
       });
@@ -143,85 +212,75 @@ ${item.artist} | ${item.genre} | ${item.style} | (${item.result})`;
       renderPagination(totalPages);
     }
 
-     function renderPagination(totalPages) {
-    const container = document.getElementById('paginationContainer');
-    container.innerHTML = '';
+    function renderPagination(totalPages) {
+      const container = document.getElementById('paginationContainer');
+      container.innerHTML = '';
 
-    // Create "Previous" button
-    const prevBtn = document.createElement('button');
-    prevBtn.textContent = 'Previous';
-    prevBtn.disabled = currentPage === 1;
-    prevBtn.addEventListener('click', () => {
-      if (currentPage > 1) {
-        currentPage--;
-        applyFilters();
-      }
-    });
-    container.appendChild(prevBtn);
-
-    // Page buttons area, show buttons near current page (e.g., 4 before and after)
-    const pageButtonsToShow = 9; // Total of 9 page buttons displayed
-    let startPage = Math.max(1, currentPage - Math.floor(pageButtonsToShow / 2));
-    let endPage = startPage + pageButtonsToShow - 1;
-    if (endPage > totalPages) {
-      endPage = totalPages;
-      startPage = Math.max(1, endPage - pageButtonsToShow + 1);
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      const btn = document.createElement('button');
-      btn.textContent = i;
-      btn.disabled = i === currentPage;
-      btn.addEventListener('click', () => {
-        currentPage = i;
-        applyFilters();
-      });
-      container.appendChild(btn);
-    }
-
-    // Create "Next" button
-    const nextBtn = document.createElement('button');
-    nextBtn.textContent = 'Next';
-    nextBtn.disabled = currentPage === totalPages;
-    nextBtn.addEventListener('click', () => {
-      if (currentPage < totalPages) {
-        currentPage++;
-        applyFilters();
-      }
-    });
-    container.appendChild(nextBtn);
-
-    // Show total pages info
-    const infoSpan = document.createElement('span');
-    infoSpan.style.marginLeft = '10px';
-    infoSpan.textContent = `Total ${totalPages} pages, current page ${currentPage}`;
-    container.appendChild(infoSpan);
-
-    // Add jump-to-page input box
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.min = 1;
-    input.max = totalPages;
-    input.placeholder = 'Go to page';
-    input.style.width = '80px';
-    input.style.marginLeft = '10px';
-
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        let val = Number(input.value);
-        if (val >= 1 && val <= totalPages) {
-          currentPage = val;
+      const prevBtn = document.createElement('button');
+      prevBtn.textContent = 'Previous';
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
           applyFilters();
-          input.value = '';
-        } else {
-          alert(`Please enter a page number between 1 and ${totalPages}`);
         }
+      });
+      container.appendChild(prevBtn);
+
+      const pageButtonsToShow = 9;
+      let startPage = Math.max(1, currentPage - Math.floor(pageButtonsToShow / 2));
+      let endPage = startPage + pageButtonsToShow - 1;
+      if (endPage > totalPages) {
+        endPage = totalPages;
+        startPage = Math.max(1, endPage - pageButtonsToShow + 1);
       }
-    });
 
-    container.appendChild(input);
-  }
+      for (let i = startPage; i <= endPage; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.disabled = i === currentPage;
+        btn.addEventListener('click', () => {
+          currentPage = i;
+          applyFilters();
+        });
+        container.appendChild(btn);
+      }
 
+      const nextBtn = document.createElement('button');
+      nextBtn.textContent = 'Next';
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          applyFilters();
+        }
+      });
+      container.appendChild(nextBtn);
+
+      const infoSpan = document.createElement('span');
+      infoSpan.style.marginLeft = '10px';
+      infoSpan.textContent = `Total ${totalPages} pages, current page ${currentPage}`;
+      container.appendChild(infoSpan);
+
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.min = 1;
+      input.max = totalPages;
+      input.placeholder = 'Go to';
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const val = Number(input.value);
+          if (val >= 1 && val <= totalPages) {
+            currentPage = val;
+            applyFilters();
+            input.value = '';
+          } else {
+            alert(`Please enter a number between 1 and ${totalPages}`);
+          }
+        }
+      });
+      container.appendChild(input);
+    }
 
     loadData();
   </script>
