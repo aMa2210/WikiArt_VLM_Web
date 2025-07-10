@@ -201,9 +201,9 @@
         div.className = `image-box ${item.result}`;
         let promptText = '';
         if (item.prompt === 'Correct Painter') {
-          promptText = `Prompt: Is this a real painting from ${item.artist}? Please answer only yes or no.`;
+          promptText = `Is this a real painting from ${item.artist}? Please answer only yes or no.`;
         } else if (item.prompt === 'Incorrect Painter') {
-          promptText = 'Prompt: Is this a real painting from {Random Artist} Please answer only yes or no.';
+          promptText = 'Is this a real painting from {Random Artist} Please answer only yes or no.';
         } else {
           promptText = `${item.prompt}`;
         }
