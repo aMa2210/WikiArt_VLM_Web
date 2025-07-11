@@ -228,20 +228,18 @@ Prompt: ${promptText}`;
 
 const table1 = `
   <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 18px; width: 100%;">
-    <thead>
-      <tr>
-        <th style="padding: 4px; text-align: center;"></th>
-        <th style="padding: 4px; text-align: center;">Painter</th>
-        <th style="padding: 4px; text-align: center;">Genre</th>
-        <th style="padding: 4px; text-align: center;">Style</th>
-      </tr>
-    </thead>
     <tbody>
       <tr>
-        <td style="padding: 4px; font-weight: bold; text-align: center;"></td>
-        <td style="padding: 4px; font-weight: bold; text-align: center;">${item.artist}</td>
-        <td style="padding: 4px; font-weight: bold; text-align: center;">${item.genre}</td>
-        <td style="padding: 4px; font-weight: bold; text-align: center;">${item.style}</td>
+        <th style="padding: 4px; text-align: left; width: 120px; font-weight: bold;">Painter</th>
+        <td style="padding: 4px; text-align: left; font-weight: normal;">${item.artist}</td>
+      </tr>
+      <tr>
+        <th style="padding: 4px; text-align: left; font-weight: bold;">Genre</th>
+        <td style="padding: 4px; text-align: left; font-weight: normal;">${item.genre}</td>
+      </tr>
+      <tr>
+        <th style="padding: 4px; text-align: left; font-weight: bold;">Style</th>
+        <td style="padding: 4px; text-align: left; font-weight: normal;">${item.style}</td>
       </tr>
     </tbody>
   </table>
@@ -285,7 +283,6 @@ parentDiv.style.alignItems = 'center';
 const group1 = document.createElement('div');
 group1.style.display = 'flex';
 group1.style.flexDirection = 'column';
-group1.appendChild(pGenerator);
 group1.appendChild(pTable1);
 group1.style.flex = '0 0 auto';
 group1.style.alignItems = 'center';
@@ -295,6 +292,7 @@ group1.style.flex = '1 1 0';
 const group_img = document.createElement('div');
 group_img.style.display = 'flex';
 group_img.style.flexDirection = 'column';
+group1.appendChild(pGenerator);
 group_img.appendChild(img);
 // group1.style.maxWidth = '60%'; 
 group_img.style.flex = '0 0 auto';
