@@ -287,11 +287,20 @@ group1.style.display = 'flex';
 group1.style.flexDirection = 'column';
 group1.appendChild(pGenerator);
 group1.appendChild(pTable1);
-group1.appendChild(img);
-// group1.style.maxWidth = '60%'; 
 group1.style.flex = '0 0 auto';
 group1.style.alignItems = 'center';
-group1.style.flex = '6 1 0';
+group1.style.flex = '1 1 0';
+
+
+const group_img = document.createElement('div');
+group_img.style.display = 'flex';
+group_img.style.flexDirection = 'column';
+group_img.appendChild(img);
+// group1.style.maxWidth = '60%'; 
+group_img.style.flex = '0 0 auto';
+group_img.style.alignItems = 'center';
+group_img.style.flex = '6 1 0';
+
 
 img.style.width = '100%';
 img.style.height = 'auto';
@@ -307,6 +316,7 @@ group2.style.flex = '1 1 0';
 
 // 把两组加到父容器中
 parentDiv.appendChild(group1);
+parentDiv.appendChild(group_img);
 parentDiv.appendChild(group2);
 
 // 把父容器加到页面上
