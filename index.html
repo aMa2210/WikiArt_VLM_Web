@@ -54,7 +54,7 @@
 
     .image-box p {
       margin-top: 8px;
-      font-size: 16px;
+      font-size: 18px;
       text-align: center;
     }
 
@@ -62,26 +62,26 @@
   //max-width: 700px;  
   margin: 0 auto; 
   flex: 0 0 auto;
-  display: flex;                  /* 使用 flex 布局 */
-  justify-content: center;        /* 水平居中子元素 */
-  align-items: center;            /* 垂直居中子元素 */
-  flex-wrap: nowrap;              /* 不换行，保持一行 */
-  gap: 6px;                      /* 子元素间距 */
+  display: flex;               
+  justify-content: center;   
+  align-items: center;     
+  flex-wrap: nowrap;    
+  gap: 6px;          
   padding: 8px 10px;
   background-color: #f0f0f0;
   box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
-  text-align: unset;              /* 去掉 text-align:center，避免冲突 */
+  text-align: unset;         
 }
 
     select, label {
       margin: 0 5px;
-      font-size: 14px;
+      font-size: 18px;
     }
 
     button {
       margin: 0 3px;
       padding: 5px 10px;
-      font-size: 14px;
+      font-size: 18px;
     }
 
     input[type="number"] {
@@ -227,7 +227,7 @@ Prompt: ${promptText}`;
         const p = document.createElement('div');
 
 const table1 = `
-  <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 14px; width: 100%;">
+  <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 18px; width: 100%;">
     <thead>
       <tr>
         <th style="padding: 4px; text-align: center;"></th>
@@ -263,7 +263,7 @@ for (let i = 0; i < analysers.length; i++) {
 }
 
 const table2 = `
-  <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 14px; width: 100%;">
+  <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 18px; width: 100%;">
     <tbody>
       ${rowsHtml}
     </tbody>
