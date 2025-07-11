@@ -176,21 +176,12 @@
       displayImages(filtered);
     }
 function getColorSquare(result) {
-  let color;
   if (result === 'correct') {
-    color = 'green';
+    return `<span style="color: green; font-weight: bold; font-size: 18px; vertical-align: middle;">✅</span>`;
   } else if (result === 'wrong') {
-    color = 'red';
+    return `<span style="color: red; font-weight: bold; font-size: 18px; vertical-align: middle;">❌</span>`;
   } 
-  return `<span style="
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    background-color: ${color};
-    border-radius: 2px;
-    vertical-align: middle;
-    margin-left: 6px;
-  "></span>`;
+  return '';  // 其他情况返回空
 }
     function displayImages(data) {
       const container = document.getElementById('imageContainer');
@@ -261,6 +252,7 @@ for (let i = 0; i < analysers.length; i++) {
 }
 
 const table2 = `
+  <h3 style="margin-bottom: 6px;">VLM results</h3>
   <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 18px; width: 100%;">
     <tbody>
       ${rowsHtml}
@@ -292,7 +284,7 @@ group1.style.flex = '1 1 0';
 const group_img = document.createElement('div');
 group_img.style.display = 'flex';
 group_img.style.flexDirection = 'column';
-group1.appendChild(pGenerator);
+group_img.appendChild(pGenerator);
 group_img.appendChild(img);
 // group1.style.maxWidth = '60%'; 
 group_img.style.flex = '0 0 auto';
