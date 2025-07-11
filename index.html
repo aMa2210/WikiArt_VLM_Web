@@ -221,16 +221,16 @@ const table1 = `
   <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 18px; width: 100%;">
     <tbody>
       <tr>
-        <th style="padding: 4px; text-align: left; width: 120px; font-weight: bold;">Painter</th>
-        <td style="padding: 4px; text-align: left; font-weight: normal;">${item.artist}</td>
+        <th style="padding: 8px 4px; text-align: left; width: 120px; font-weight: bold;">Painter</th>
+        <td style="padding: 8px 4px; text-align: left; font-weight: normal;">${item.artist}</td>
       </tr>
       <tr>
-        <th style="padding: 4px; text-align: left; font-weight: bold;">Genre</th>
-        <td style="padding: 4px; text-align: left; font-weight: normal;">${item.genre}</td>
+        <th style="padding: 8px 4px; text-align: left; font-weight: bold;">Genre</th>
+        <td style="padding: 8px 4px; text-align: left; font-weight: normal;">${item.genre}</td>
       </tr>
       <tr>
-        <th style="padding: 4px; text-align: left; font-weight: bold;">Style</th>
-        <td style="padding: 4px; text-align: left; font-weight: normal;">${item.style}</td>
+        <th style="padding: 8px 4px; text-align: left; font-weight: bold;">Style</th>
+        <td style="padding: 8px 4px; text-align: left; font-weight: normal;">${item.style}</td>
       </tr>
     </tbody>
   </table>
@@ -252,7 +252,7 @@ for (let i = 0; i < analysers.length; i++) {
 }
 
 const table2 = `
-  <h3 style="margin-bottom: 6px;">VLM results</h3>
+  <h3 style="text-align: center; margin-bottom: 12px;">VLM results</h3>
   <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 18px; width: 100%;">
     <tbody>
       ${rowsHtml}
