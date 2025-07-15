@@ -121,7 +121,7 @@
     const pageSize = 1;
 
     async function loadData() {
-      const [resCorrect, resWrong] = await Promise.all([
+      const [resCorrect, resWrong, resCorrect_SD, resWrong_SD] = await Promise.all([
         fetch('original_correct.json'),
         fetch('original_random.json'),
         fetch('Stable-Diffusion_correct.json'),
@@ -129,8 +129,10 @@
       ]);
       const dataCorrect = await resCorrect.json();
       const dataWrong = await resWrong.json();
+      const dataCorrect_SD = await resCorrect_SD.json();
+      const dataWrong_SD = await resWrong_SD.json();
 
-      allData = [...dataCorrect, ...dataWrong];
+      allData = [...dataCorrect, ...dataWrong, ...dataCorrect_SD, ...dataWrong_SD];
 
       ['generator', 'prompt', 'artist', 'genre', 'style'].forEach(field => {
         populateSelect(field);
