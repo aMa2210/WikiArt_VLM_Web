@@ -309,10 +309,9 @@ function displayImagesByPosition(filteredByGenerator, minLength) {
       container.appendChild(tableTitleWrapper);
 
       const tableDiv = document.createElement('div');
-      tableDiv.style.width = '100%';
+      tableDiv.style.width = '95%';
       tableDiv.style.overflowX = 'auto';
       tableDiv.style.margin = '0 0 0 0';
-      tableDiv.style.display = 'flex';
       tableDiv.style.justifyContent = 'center';
 
       const table = document.createElement('table');
