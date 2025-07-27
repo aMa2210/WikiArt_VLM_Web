@@ -121,7 +121,7 @@
     const pageSize = 1;
 
     async function loadData() {
-      const [resCorrect, resWrong, resCorrect_SD, resWrong_SD, resCorrect_FLUX, resWrong_FLUX, resCorrect_F-Lite, resWrong_F-Lite] = await Promise.all([
+      const [resCorrect, resWrong, resCorrect_SD, resWrong_SD, resCorrect_FLUX, resWrong_FLUX, resCorrect_FLite, resWrong_FLite] = await Promise.all([
         fetch('original_correct.json'),
         fetch('original_random.json'),
         fetch('Stable-Diffusion_correct.json'),
@@ -137,10 +137,10 @@
       const dataWrong_SD = await resWrong_SD.json();
       const dataCorrect_FLUX = await resCorrect_FLUX.json();
       const dataWrong_FLUX = await resWrong_FLUX.json();
-      const dataCorrect_F-Lite = await resCorrect_F-Lite.json();
-      const dataWrong_F-Lite = await resWrong_F-Lite.json();
+      const dataCorrect_FLite = await resCorrect_F-Lite.json();
+      const dataWrong_FLite = await resWrong_F-Lite.json();
 
-      allData = [...dataCorrect, ...dataWrong, ...dataCorrect_SD, ...dataWrong_SD, ...dataCorrect_FLUX, ...dataWrong_FLUX, ...dataCorrect_F-Lite, ...dataWrong_F-Lite];
+      allData = [...dataCorrect, ...dataWrong, ...dataCorrect_SD, ...dataWrong_SD, ...dataCorrect_FLUX, ...dataWrong_FLUX, ...dataCorrect_FLite, ...dataWrong_FLite];
 
       ['generator', 'prompt', 'artist', 'genre', 'style'].forEach(field => {
         populateSelect(field);
