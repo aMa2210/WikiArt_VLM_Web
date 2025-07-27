@@ -221,6 +221,31 @@ function displayImagesByPosition(filteredByGenerator, minLength) {
 
     // 3. VLM Results table for all generators on the page
     if (vlmResults.length > 0) {
+      // Always include 'Original' as the first row if available
+      const originalGenerator = 'Original';
+      let originalRow = null;
+      for (let g = 0; g < generatorOrder.length; g++) {
+        if (generatorOrder[g] === originalGenerator) {
+          const arr = filteredByGenerator[originalGenerator];
+          if (arr && arr[i]) {
+            let fullName = arr[i].generator || originalGenerator;
+            let results = [arr[i].result1, arr[i].result2, arr[i].result3, arr[i].result4, arr[i].result5, arr[i].result6];
+            originalRow = {
+              generator: fullName,
+              results: results
+            };
+          }
+        }
+      }
+      // Build table rows: start with Original, then the rest (skip duplicate if already included)
+      let tableRows = [];
+      if (originalRow) tableRows.push(originalRow);
+      vlmResults.forEach(row => {
+        if (!originalRow || row.generator !== originalRow.generator) {
+          tableRows.push(row);
+        }
+      });
+
       // Title and info icon
       const tableTitleWrapper = document.createElement('div');
       tableTitleWrapper.style.display = 'flex';
@@ -323,7 +348,7 @@ function displayImagesByPosition(filteredByGenerator, minLength) {
 
       // Table body
       const tbody = document.createElement('tbody');
-      vlmResults.forEach(row => {
+      tableRows.forEach(row => {
         const tr = document.createElement('tr');
         const tdGen = document.createElement('td');
         tdGen.textContent = row.generator;
@@ -447,9 +472,9 @@ function renderImageBox(item) {
     </table>
   `;
 
+  // Build VLM results table rows for the current item only
   const analysers = [item.analyser1, item.analyser2, item.analyser3, item.analyser4, item.analyser5, item.analyser6];
   const results = [item.result1, item.result2, item.result3, item.result4, item.result5, item.result6];
-
   let rowsHtml = '';
   for (let i = 0; i < analysers.length; i++) {
     rowsHtml += `
