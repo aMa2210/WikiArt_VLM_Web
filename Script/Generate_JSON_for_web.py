@@ -10,8 +10,12 @@ file_name_random = ['All_Analyser_gpt4.1-mini_random_artist.xlsx', 'All_Analyser
                     'All_Analyser_Qwen2.5-VL_random_artist.xlsx', 'All_Analyser_phi-4_random_artist.xlsx',
                     'All_Analyser_pixtral_random_artist.xlsx', 'All_Analyser_llama3.2_random_artist.xlsx']
 
-path_corrects = ['D:/AI_impostors/Results_stable_diffusion/Correct_painter_prompt/' + file for file in file_name_correct]
-path_randoms = ['D:/AI_impostors/Results_stable_diffusion/Random_painter_prompt/' + file for file in file_name_random]
+path_corrects = ['./Results_all_wikiart/Correct_painter_prompt/' + file for file in file_name_correct]
+path_randoms = ['./Results_all_wikiart/Random_painter_prompt/' + file for file in file_name_random]
+
+
+df_generation_prompt = pd.read_excel('All_gpt4.1-mini_prompt.xlsx', engine='openpyxl', index_col=0)
+
 
 
 def format_text(text):
@@ -29,12 +33,14 @@ data_dict = {}
 
 for idx, row in base_df.iterrows():
     data_dict[idx] = {
-        "generator": "Stable Diffusion-3.5",
-        "image": f"https://raw.githubusercontent.com/aMa2210/WikiArt_VLM/main/images/Stable-Diffusion/{idx}.jpg",
+        "generator": "Original",
+        "image": f"https://raw.githubusercontent.com/aMa2210/WikiArt_VLM/main/images/Original/{idx}.jpg",
         "artist": format_text(row['artist']),
         "genre": format_text(row['genre']),
         "style": format_text(row['style']),
-        "prompt": "Correct Painter"
+        "prompt": "Correct Painter",
+        # 'generation_prompt': f"Produce an image that closely resembles a painting by {format_text(row['artist'])}, but is not an exact copy of his works: {df_generation_prompt.loc[idx, 'answer']}"
+        'generation_prompt': '',
     }
 
 for i, (path, model_name) in enumerate(zip(path_corrects, model_names), 1):
@@ -46,7 +52,7 @@ for i, (path, model_name) in enumerate(zip(path_corrects, model_names), 1):
 
 all_items = list(data_dict.values())
 
-with open('Stable-Diffusion_correct.json', 'w', encoding='utf-8') as f:
+with open('original_correct.json', 'w', encoding='utf-8') as f:
     json.dump(all_items, f, ensure_ascii=False, indent=2)
 
 
@@ -56,12 +62,14 @@ data_dict_random = {}
 
 for idx, row in base_df_random.iterrows():
     data_dict_random[idx] = {
-        "generator": "Stable Diffusion-3.5",
-        "image": f"https://raw.githubusercontent.com/aMa2210/WikiArt_VLM/main/images/Stable-Diffusion/{idx}.jpg",
+        "generator": "Original",
+        "image": f"https://raw.githubusercontent.com/aMa2210/WikiArt_VLM/main/images/Original/{idx}.jpg",
         "artist": format_text(row['artist']),
         "genre": format_text(row['genre']),
         "style": format_text(row['style']),
-        "prompt": "Incorrect Painter"
+        "prompt": "Incorrect Painter",
+        # 'generation_prompt': f"Produce an image that closely resembles a painting by {format_text(row['artist'])}, but is not an exact copy of his works: {df_generation_prompt.loc[idx, 'answer']}"
+        'generation_prompt': '',
     }
 
 for i, (path, model_name) in enumerate(zip(path_randoms, model_names), 1):
@@ -73,5 +81,5 @@ for i, (path, model_name) in enumerate(zip(path_randoms, model_names), 1):
 
 all_items_random = list(data_dict_random.values())
 
-with open('Stable-Diffusion_random.json', 'w', encoding='utf-8') as f:
+with open('original_random.json', 'w', encoding='utf-8') as f:
     json.dump(all_items_random, f, ensure_ascii=False, indent=2)
