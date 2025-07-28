@@ -156,7 +156,7 @@ function displayImagesByPosition(filteredByGenerator, minLength) {
     promptText.style.textAlign = 'center';
     promptText.style.margin = '0 0 24px 0';
     promptText.style.color = '#000000';
-    promptText.style.fontSize = '16px';
+    promptText.style.fontSize = '22px';
     container.appendChild(promptText);
 
     const gridContainer = document.createElement('div');
