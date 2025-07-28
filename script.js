@@ -151,6 +151,14 @@ function displayImagesByPosition(filteredByGenerator, minLength) {
     gridTitle.style.color = '#4e6edb';
     container.appendChild(gridTitle);
 
+    const promptText = document.createElement('p');
+    promptText.textContent = 'Image generation prompt: '+filteredByGenerator[generatorOrder[1]][i].generation_prompt;
+    promptText.style.textAlign = 'center';
+    promptText.style.margin = '0 0 24px 0';
+    promptText.style.color = '#000000';
+    promptText.style.fontSize = '16px';
+    container.appendChild(promptText);
+
     const gridContainer = document.createElement('div');
     gridContainer.className = 'generators-grid';
     gridContainer.style.display = 'grid';
