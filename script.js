@@ -282,7 +282,7 @@ function displayImagesByPosition(filteredByGenerator, minLength) {
 
       // Tooltip
       const tooltip = document.createElement('div');
-      tooltip.textContent = 'A tick if it identifies the actual author in the original image, or correctly identifies that the image is not by the author if it’s a version or a painting by someone else. A cross in any other case.';
+      tooltip.textContent = 'A tick if it identifies the actual author in the original image, or correctly identifies that the image is not by the author (it is a version or a painting by another artist). A cross in any other case.';
       tooltip.style.position = 'absolute';
       tooltip.style.bottom = '120%';
       tooltip.style.left = '50%';
@@ -498,7 +498,7 @@ function renderImageBox(item) {
     <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 20px;">
       <h3 style="text-align: center; font-size: 24px; color: #4e6edb; margin: 0;">VLM results</h3>
       <span class="vlm-info-icon" tabindex="0" aria-label="Info" style="font-size: 18px; color: #4e6edb; cursor: help; position: relative; margin: 0; display: inline-block;">ℹ️
-        <span class="vlm-tooltip" style="position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: #222; color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 14px; white-space: pre-line; box-shadow: 0 2px 8px rgba(0,0,0,0.18); z-index: 10000; display: none; pointer-events: none; max-width: 420px; min-width: 260px;">A tick if it identifies the actual author in the original image, or correctly identifies that the image is not by the author if it’s a version or a painting by someone else. A cross in any other case.</span>
+        <span class="vlm-tooltip" style="position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%); background: #222; color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 14px; white-space: pre-line; box-shadow: 0 2px 8px rgba(0,0,0,0.18); z-index: 10000; display: none; pointer-events: none; max-width: 420px; min-width: 260px;">A tick if it identifies the actual author in the original image, or correctly identifies that the image is not by the author (it is a version or a painting by another artist). A cross in any other case.</span>
       </span>
     </div>
     <table style="border-collapse: collapse; margin-bottom: 8px; font-size: 22px; width: 100%;">
